@@ -26,7 +26,7 @@ export async function expandFiles(selected: File[]) {
       for (const [path, data] of Object.entries(entries)) {
         if (!path || path.endsWith('/')) continue
         expanded.push(
-          new File([data], normalizePath(path), {
+          new File([data.buffer], normalizePath(path), {
             type: guessContentType(path),
           }),
         )
@@ -37,7 +37,7 @@ export async function expandFiles(selected: File[]) {
       const unpacked = gunzipSync(new Uint8Array(await readArrayBuffer(file)))
       for (const entry of untar(unpacked)) {
         expanded.push(
-          new File([entry.data], normalizePath(entry.path), {
+          new File([entry.data.buffer], normalizePath(entry.path), {
             type: guessContentType(entry.path),
           }),
         )
@@ -47,7 +47,7 @@ export async function expandFiles(selected: File[]) {
     if (lower.endsWith('.gz')) {
       const unpacked = gunzipSync(new Uint8Array(await readArrayBuffer(file)))
       const name = file.name.replace(/\.gz$/i, '')
-      expanded.push(new File([unpacked], name, { type: guessContentType(name) }))
+      expanded.push(new File([unpacked.buffer], name, { type: guessContentType(name) }))
       continue
     }
     expanded.push(file)

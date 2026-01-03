@@ -66,7 +66,7 @@ describe('expandFiles', () => {
       'SKILL.md': strToU8('hello'),
       'docs/readme.txt': strToU8('doc'),
     })
-    const zipFile = new File([zip], 'pack.zip', { type: 'application/zip' })
+    const zipFile = new File([zip.buffer], 'pack.zip', { type: 'application/zip' })
     const result = await expandFiles([zipFile])
     expect(result.map((file) => file.name)).toEqual(['SKILL.md', 'docs/readme.txt'])
   })
@@ -77,14 +77,14 @@ describe('expandFiles', () => {
       { name: 'notes.txt', content: 'yo' },
     ])
     const tgz = gzipSync(tar)
-    const tgzFile = new File([tgz], 'bundle.tgz', { type: 'application/gzip' })
+    const tgzFile = new File([tgz.buffer], 'bundle.tgz', { type: 'application/gzip' })
     const result = await expandFiles([tgzFile])
     expect(result.map((file) => file.name)).toEqual(['SKILL.md', 'notes.txt'])
   })
 
   it('expands .gz single files', async () => {
     const gz = gzipSync(strToU8('content'))
-    const gzFile = new File([gz], 'skill.md.gz', { type: 'application/gzip' })
+    const gzFile = new File([gz.buffer], 'skill.md.gz', { type: 'application/gzip' })
     const result = await expandFiles([gzFile])
     expect(result.map((file) => file.name)).toEqual(['skill.md'])
   })
