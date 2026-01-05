@@ -11,7 +11,7 @@ export type ParsedSkillFrontmatter = Record<string, string>
 export type { ClawdisSkillMetadata, SkillInstallSpec }
 
 const FRONTMATTER_START = '---'
-const DEFAULT_EMBEDDING_MAX_CHARS = 24_000
+const DEFAULT_EMBEDDING_MAX_CHARS = 12_000
 
 export function parseFrontmatter(content: string): ParsedSkillFrontmatter {
   const frontmatter: ParsedSkillFrontmatter = {}

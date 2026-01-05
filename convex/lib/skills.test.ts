@@ -94,7 +94,7 @@ describe('skills utils', () => {
       readme: 'x'.repeat(40_000),
       otherFiles: [],
     })
-    expect(text.length).toBeLessThanOrEqual(24_000)
+    expect(text.length).toBeLessThanOrEqual(12_000)
   })
 
   it('hashes skill files deterministically', async () => {
