@@ -15,9 +15,11 @@ import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SkillsIndexRouteImport } from './routes/skills/index'
 import { Route as UHandleRouteImport } from './routes/u/$handle'
 import { Route as SkillsSlugRouteImport } from './routes/skills/$slug'
 import { Route as CliAuthRouteImport } from './routes/cli/auth'
+import { Route as OwnerSlugRouteImport } from './routes/$owner/$slug'
 
 const UploadRoute = UploadRouteImport.update({
   id: '/upload',
@@ -49,6 +51,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SkillsIndexRoute = SkillsIndexRouteImport.update({
+  id: '/skills/',
+  path: '/skills/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UHandleRoute = UHandleRouteImport.update({
   id: '/u/$handle',
   path: '/u/$handle',
@@ -64,6 +71,11 @@ const CliAuthRoute = CliAuthRouteImport.update({
   path: '/cli/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OwnerSlugRoute = OwnerSlugRouteImport.update({
+  id: '/$owner/$slug',
+  path: '/$owner/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -72,9 +84,11 @@ export interface FileRoutesByFullPath {
   '/settings': typeof SettingsRoute
   '/stars': typeof StarsRoute
   '/upload': typeof UploadRoute
+  '/$owner/$slug': typeof OwnerSlugRoute
   '/cli/auth': typeof CliAuthRoute
   '/skills/$slug': typeof SkillsSlugRoute
   '/u/$handle': typeof UHandleRoute
+  '/skills': typeof SkillsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -83,9 +97,11 @@ export interface FileRoutesByTo {
   '/settings': typeof SettingsRoute
   '/stars': typeof StarsRoute
   '/upload': typeof UploadRoute
+  '/$owner/$slug': typeof OwnerSlugRoute
   '/cli/auth': typeof CliAuthRoute
   '/skills/$slug': typeof SkillsSlugRoute
   '/u/$handle': typeof UHandleRoute
+  '/skills': typeof SkillsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -95,9 +111,11 @@ export interface FileRoutesById {
   '/settings': typeof SettingsRoute
   '/stars': typeof StarsRoute
   '/upload': typeof UploadRoute
+  '/$owner/$slug': typeof OwnerSlugRoute
   '/cli/auth': typeof CliAuthRoute
   '/skills/$slug': typeof SkillsSlugRoute
   '/u/$handle': typeof UHandleRoute
+  '/skills/': typeof SkillsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -108,9 +126,11 @@ export interface FileRouteTypes {
     | '/settings'
     | '/stars'
     | '/upload'
+    | '/$owner/$slug'
     | '/cli/auth'
     | '/skills/$slug'
     | '/u/$handle'
+    | '/skills'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -119,9 +139,11 @@ export interface FileRouteTypes {
     | '/settings'
     | '/stars'
     | '/upload'
+    | '/$owner/$slug'
     | '/cli/auth'
     | '/skills/$slug'
     | '/u/$handle'
+    | '/skills'
   id:
     | '__root__'
     | '/'
@@ -130,9 +152,11 @@ export interface FileRouteTypes {
     | '/settings'
     | '/stars'
     | '/upload'
+    | '/$owner/$slug'
     | '/cli/auth'
     | '/skills/$slug'
     | '/u/$handle'
+    | '/skills/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -142,9 +166,11 @@ export interface RootRouteChildren {
   SettingsRoute: typeof SettingsRoute
   StarsRoute: typeof StarsRoute
   UploadRoute: typeof UploadRoute
+  OwnerSlugRoute: typeof OwnerSlugRoute
   CliAuthRoute: typeof CliAuthRoute
   SkillsSlugRoute: typeof SkillsSlugRoute
   UHandleRoute: typeof UHandleRoute
+  SkillsIndexRoute: typeof SkillsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -191,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/skills/': {
+      id: '/skills/'
+      path: '/skills'
+      fullPath: '/skills'
+      preLoaderRoute: typeof SkillsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/u/$handle': {
       id: '/u/$handle'
       path: '/u/$handle'
@@ -212,6 +245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CliAuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$owner/$slug': {
+      id: '/$owner/$slug'
+      path: '/$owner/$slug'
+      fullPath: '/$owner/$slug'
+      preLoaderRoute: typeof OwnerSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -222,9 +262,11 @@ const rootRouteChildren: RootRouteChildren = {
   SettingsRoute: SettingsRoute,
   StarsRoute: StarsRoute,
   UploadRoute: UploadRoute,
+  OwnerSlugRoute: OwnerSlugRoute,
   CliAuthRoute: CliAuthRoute,
   SkillsSlugRoute: SkillsSlugRoute,
   UHandleRoute: UHandleRoute,
+  SkillsIndexRoute: SkillsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
