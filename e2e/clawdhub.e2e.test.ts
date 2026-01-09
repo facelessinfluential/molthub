@@ -174,6 +174,61 @@ describe('clawdhub e2e', () => {
     }
   })
 
+  it('sync dry-run finds skills from clawdbot.json roots', async () => {
+    const registry = process.env.CLAWDHUB_REGISTRY?.trim() || 'https://clawdhub.com'
+    const site = process.env.CLAWDHUB_SITE?.trim() || 'https://clawdhub.com'
+    const token = mustGetToken() ?? (await readGlobalConfig())?.token ?? null
+    if (!token) {
+      throw new Error('Missing token. Set CLAWDHUB_E2E_TOKEN or run: bun clawdhub auth login')
+    }
+
+    const cfg = await makeTempConfig(registry, token)
+    const root = await mkdtemp(join(tmpdir(), 'clawdhub-e2e-clawdbot-'))
+    const stateDir = join(root, 'state')
+    const configPath = join(root, 'clawdbot.json')
+    const workspace = join(root, 'clawd-work')
+    const skillsRoot = join(workspace, 'skills')
+    const skillDir = join(skillsRoot, 'auto-skill')
+
+    try {
+      await mkdir(skillDir, { recursive: true })
+      await writeFile(join(skillDir, 'SKILL.md'), '# Skill\n', 'utf8')
+
+      const config = `{
+        // JSON5-style comments + trailing commas
+        routing: {
+          agents: {
+            work: { name: 'Work', workspace: '${workspace}', },
+          },
+        },
+      }`
+      await writeFile(configPath, config, 'utf8')
+
+      const result = spawnSync(
+        'bun',
+        ['clawdhub', 'sync', '--dry-run', '--all', '--site', site, '--registry', registry],
+        {
+          cwd: process.cwd(),
+          env: {
+            ...process.env,
+            CLAWDHUB_CONFIG_PATH: cfg.path,
+            CLAWDHUB_DISABLE_TELEMETRY: '1',
+            CLAWDBOT_CONFIG_PATH: configPath,
+            CLAWDBOT_STATE_DIR: stateDir,
+          },
+          encoding: 'utf8',
+        },
+      )
+      expect(result.status).toBe(0)
+      expect(result.stderr).not.toMatch(/error:/i)
+      expect(result.stdout).toMatch(/Dry run/i)
+      expect(result.stdout).toMatch(/auto-skill/i)
+    } finally {
+      await rm(root, { recursive: true, force: true })
+      await rm(cfg.dir, { recursive: true, force: true })
+    }
+  })
+
   it('publishes, deletes, and undeletes a skill (logged-in)', async () => {
     const registry = process.env.CLAWDHUB_REGISTRY?.trim() || 'https://clawdhub.com'
     const site = process.env.CLAWDHUB_SITE?.trim() || 'https://clawdhub.com'

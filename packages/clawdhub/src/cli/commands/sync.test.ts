@@ -57,6 +57,11 @@ vi.mock('../scanSkills.js', () => ({
   getFallbackSkillRoots: vi.fn(() => []),
 }))
 
+const mockResolveClawdbotSkillRoots = vi.fn(async () => ({ roots: [], labels: {} }))
+vi.mock('../clawdbotConfig.js', () => ({
+  resolveClawdbotSkillRoots: () => mockResolveClawdbotSkillRoots(),
+}))
+
 vi.mock('../../skills.js', async () => {
   const actual = await vi.importActual<typeof import('../../skills.js')>('../../skills.js')
   return {
@@ -217,6 +222,35 @@ describe('cmdSync', () => {
     const output = mockLog.mock.calls.map((call) => String(call[0])).join('\n')
     expect(output).toMatch(/Skipped duplicate slugs/)
     expect(output).toMatch(/dup-skill/)
+  })
+
+  it('prints labeled roots when clawdbot roots are detected', async () => {
+    interactive = false
+    mockResolveClawdbotSkillRoots.mockResolvedValueOnce({
+      roots: ['/auto'],
+      labels: { '/auto': 'Agent: Work' },
+    })
+    const { findSkillFolders } = await import('../scanSkills.js')
+    vi.mocked(findSkillFolders).mockImplementation(async (root: string) => {
+      if (root === '/auto') {
+        return [{ folder: '/auto/alpha', slug: 'alpha', displayName: 'Alpha' }]
+      }
+      return []
+    })
+    mockApiRequest.mockImplementation(async (_registry: string, args: { path: string }) => {
+      if (args.path === '/api/v1/whoami') return { user: { handle: 'steipete' } }
+      if (args.path === '/api/cli/telemetry/sync') return { ok: true }
+      if (args.path.startsWith('/api/v1/resolve?')) {
+        throw new Error('Skill not found')
+      }
+      throw new Error(`Unexpected apiRequest: ${args.path}`)
+    })
+
+    await cmdSync(makeOpts(), { all: true, dryRun: true }, true)
+
+    const output = mockLog.mock.calls.map((call) => String(call[0])).join('\n')
+    expect(output).toMatch(/Roots with skills/)
+    expect(output).toMatch(/Agent: Work/)
   })
 
   it('allows empty changelog for updates (interactive)', async () => {
