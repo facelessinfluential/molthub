@@ -34,7 +34,7 @@ jobs:
       - name: Typecheck packages
         run: |
           bunx tsc -p packages/schema/tsconfig.json --noEmit
-          bunx tsc -p packages/clawdhub/tsconfig.json --noEmit
+          bunx tsc -p packages/molthub/tsconfig.json --noEmit
 
       - name: Build
         run: bun run build

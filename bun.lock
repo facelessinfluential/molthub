@@ -3,7 +3,7 @@
   "configVersion": 0,
   "workspaces": {
     "": {
-      "name": "clawdhub",
+      "name": "molthub",
       "dependencies": {
         "@auth/core": "^0.37.4",
         "@convex-dev/auth": "^0.0.90",
@@ -21,7 +21,7 @@
         "@tanstack/react-start": "^1.152.0",
         "@tanstack/router-plugin": "^1.151.6",
         "@vercel/analytics": "^1.6.1",
-        "clawdhub-schema": "workspace:*",
+        "molthub-schema": "workspace:*",
         "clsx": "^2.1.1",
         "convex": "^1.31.5",
         "convex-helpers": "^0.1.111",
@@ -60,11 +60,11 @@
         "vitest": "^4.0.17",
       },
     },
-    "packages/clawdhub": {
-      "name": "clawdhub",
+    "packages/molthub": {
+      "name": "molthub",
       "version": "0.3.0",
       "bin": {
-        "clawdhub": "bin/clawdhub.js",
+        "molthub": "bin/molthub.js",
       },
       "dependencies": {
         "@clack/prompts": "^0.11.0",
@@ -85,7 +85,7 @@
       },
     },
     "packages/schema": {
-      "name": "clawdhub-schema",
+      "name": "molthub-schema",
       "version": "0.0.2",
       "dependencies": {
         "arktype": "^2.1.29",
@@ -722,9 +722,9 @@
 
     "chokidar": ["chokidar@3.6.0", "", { "dependencies": { "anymatch": "~3.1.2", "braces": "~3.0.2", "glob-parent": "~5.1.2", "is-binary-path": "~2.1.0", "is-glob": "~4.0.1", "normalize-path": "~3.0.0", "readdirp": "~3.6.0" }, "optionalDependencies": { "fsevents": "~2.3.2" } }, "sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw=="],
 
-    "clawdhub": ["clawdhub@workspace:packages/clawdhub"],
+    "molthub": ["molthub@workspace:packages/molthub"],
 
-    "clawdhub-schema": ["clawdhub-schema@workspace:packages/schema"],
+    "molthub-schema": ["molthub-schema@workspace:packages/schema"],
 
     "cli-cursor": ["cli-cursor@5.0.0", "", { "dependencies": { "restore-cursor": "^5.0.0" } }, "sha512-aCj4O5wKyszjMmDT4tZj93kxyydN/K5zPWSCe6/0AV/AA1pqe5ZBIw0a2ZfPQV7lL5/yb5HsUreJ6UFAF1tEQw=="],
 

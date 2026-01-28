@@ -6,16 +6,16 @@ read_when:
 
 # Troubleshooting
 
-## `clawdhub login` opens browser but never completes
+## `molthub login` opens browser but never completes
 
 - Ensure your browser can reach `http://127.0.0.1:<port>/callback` (local firewalls/VPNs can interfere).
 - Use headless mode:
   - create a token in the web UI (Settings → API tokens)
-  - `clawdhub login --token clh_...`
+  - `molthub login --token clh_...`
 
 ## `whoami` / `publish` returns `Unauthorized` (401)
 
-- Token missing or revoked: check your config file (`CLAWDHUB_CONFIG_PATH` override?).
+- Token missing or revoked: check your config file (`MOLTHUB_CONFIG_PATH` override?).
 - Ensure requests include `Authorization: Bearer ...` (CLI does this automatically).
 
 ## `publish` fails with `OPENAI_API_KEY is not configured`
@@ -28,11 +28,11 @@ read_when:
 - `sync` looks for folders containing `SKILL.md` (or `skill.md`).
 - It scans:
   - workdir first
-  - then fallback roots (legacy `~/clawdis/skills`, `~/clawdbot/skills`, etc.)
+  - then fallback roots (legacy `~/moltbot/skills`, `~/moltbot/skills`, etc.)
 - Provide explicit roots:
 
 ```bash
-clawdhub sync --root /path/to/skills
+molthub sync --root /path/to/skills
 ```
 
 ## `update` refuses due to “local changes (no match)”
@@ -40,8 +40,8 @@ clawdhub sync --root /path/to/skills
 - Your local files don’t match any published fingerprint.
 - Options:
   - keep local edits; skip updating
-  - overwrite: `clawdhub update <slug> --force`
-  - publish as fork: copy to new folder/slug then `clawdhub publish ... --fork-of upstream@version`
+  - overwrite: `molthub update <slug> --force`
+  - publish as fork: copy to new folder/slug then `molthub publish ... --fork-of upstream@version`
 
 ## `GET /api/*` works locally but not on Vercel
 

@@ -1,5 +1,5 @@
 import { useNavigate } from '@tanstack/react-router'
-import type { ClawdisSkillMetadata, SkillInstallSpec } from 'clawdhub-schema'
+import type { MoltbotSkillMetadata, SkillInstallSpec } from 'molthub-schema'
 import { useAction, useMutation, useQuery } from 'convex/react'
 import { useEffect, useMemo, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
@@ -97,26 +97,26 @@ export function SkillDetailPage({
   const versionById = new Map<Id<'skillVersions'>, Doc<'skillVersions'>>(
     (diffVersions ?? versions ?? []).map((version) => [version._id, version]),
   )
-  const clawdis = (latestVersion?.parsed as { clawdis?: ClawdisSkillMetadata } | undefined)?.clawdis
-  const osLabels = useMemo(() => formatOsList(clawdis?.os), [clawdis?.os])
-  const requirements = clawdis?.requires
-  const installSpecs = clawdis?.install ?? []
-  const nixPlugin = clawdis?.nix?.plugin
-  const nixSystems = clawdis?.nix?.systems ?? []
+  const moltbot = (latestVersion?.parsed as { moltbot?: MoltbotSkillMetadata } | undefined)?.moltbot
+  const osLabels = useMemo(() => formatOsList(moltbot?.os), [moltbot?.os])
+  const requirements = moltbot?.requires
+  const installSpecs = moltbot?.install ?? []
+  const nixPlugin = moltbot?.nix?.plugin
+  const nixSystems = moltbot?.nix?.systems ?? []
   const nixSnippet = nixPlugin ? formatNixInstallSnippet(nixPlugin) : null
-  const configRequirements = clawdis?.config
+  const configRequirements = moltbot?.config
   const configExample = configRequirements?.example
     ? formatConfigSnippet(configRequirements.example)
     : null
-  const cliHelp = clawdis?.cliHelp
+  const cliHelp = moltbot?.cliHelp
   const hasRuntimeRequirements = Boolean(
-    clawdis?.emoji ||
+    moltbot?.emoji ||
       osLabels.length ||
       requirements?.bins?.length ||
       requirements?.anyBins?.length ||
       requirements?.env?.length ||
       requirements?.config?.length ||
-      clawdis?.primaryEnv,
+      moltbot?.primaryEnv,
   )
   const hasInstallSpecs = installSpecs.length > 0
   const hasPluginBundle = Boolean(nixSnippet || configRequirements || cliHelp)
@@ -365,7 +365,7 @@ export function SkillDetailPage({
                       Runtime requirements
                     </h3>
                     <div className="skill-panel-body">
-                      {clawdis?.emoji ? <div className="tag">{clawdis.emoji} Clawdis</div> : null}
+                      {moltbot?.emoji ? <div className="tag">{moltbot.emoji} Moltbot</div> : null}
                       {osLabels.length ? (
                         <div className="stat">
                           <strong>OS</strong>
@@ -396,10 +396,10 @@ export function SkillDetailPage({
                           <span>{requirements.config.join(', ')}</span>
                         </div>
                       ) : null}
-                      {clawdis?.primaryEnv ? (
+                      {moltbot?.primaryEnv ? (
                         <div className="stat">
                           <strong>Primary env</strong>
-                          <span>{clawdis.primaryEnv}</span>
+                          <span>{moltbot.primaryEnv}</span>
                         </div>
                       ) : null}
                     </div>
@@ -440,7 +440,7 @@ export function SkillDetailPage({
               Install via Nix
             </h2>
             <p className="section-subtitle" style={{ margin: 0 }}>
-              {nixSystems.length ? `Systems: ${nixSystems.join(', ')}` : 'nix-clawdbot'}
+              {nixSystems.length ? `Systems: ${nixSystems.join(', ')}` : 'nix-moltbot'}
             </p>
             <pre className="hero-install-code" style={{ marginTop: 12 }}>
               {nixSnippet}
@@ -778,6 +778,6 @@ function formatBytes(bytes: number) {
 }
 
 function formatNixInstallSnippet(plugin: string) {
-  const snippet = `programs.clawdbot.plugins = [ { source = "${plugin}"; } ];`
+  const snippet = `programs.moltbot.plugins = [ { source = "${plugin}"; } ];`
   return formatConfigSnippet(snippet)
 }

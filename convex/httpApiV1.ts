@@ -1,4 +1,4 @@
-import { CliPublishRequestSchema, parseArk } from 'clawdhub-schema'
+import { CliPublishRequestSchema, parseArk } from 'molthub-schema'
 import { api, internal } from './_generated/api'
 import type { Doc, Id } from './_generated/dataModel'
 import type { ActionCtx } from './_generated/server'

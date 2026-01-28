@@ -1,5 +1,5 @@
 {
-  "name": "clawdhub",
+  "name": "molthub",
   "private": true,
   "type": "module",
   "workspaces": [
@@ -20,7 +20,7 @@
     "convex:deploy": "bunx convex deploy --typecheck=disable --yes",
     "lint": "bun run lint:biome && bun run lint:oxlint",
     "lint:biome": "biome check .",
-    "lint:oxlint": "oxlint --type-aware --tsconfig ./tsconfig.oxlint.json ./src ./convex ./packages/clawdhub/src ./packages/schema/src",
+    "lint:oxlint": "oxlint --type-aware --tsconfig ./tsconfig.oxlint.json ./src ./convex ./packages/molthub/src ./packages/schema/src",
     "format": "biome format --write ."
   },
   "dependencies": {
@@ -40,7 +40,7 @@
     "@tanstack/react-start": "^1.152.0",
     "@tanstack/router-plugin": "^1.151.6",
     "@vercel/analytics": "^1.6.1",
-    "clawdhub-schema": "workspace:*",
+    "molthub-schema": "workspace:*",
     "clsx": "^2.1.1",
     "convex": "^1.31.5",
     "convex-helpers": "^0.1.111",

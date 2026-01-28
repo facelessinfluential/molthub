@@ -7,41 +7,41 @@ read_when:
 
 # CLI
 
-CLI package: `packages/clawdhub/` (bin: `clawdhub`).
+CLI package: `packages/molthub/` (bin: `molthub`).
 
 From this repo you can run it via the wrapper script:
 
 ```bash
-bun clawdhub --help
+bun molthub --help
 ```
 
 ## Global flags
 
-- `--workdir <dir>`: working directory (default: cwd; falls back to Clawdbot workspace if configured)
+- `--workdir <dir>`: working directory (default: cwd; falls back to Moltbot workspace if configured)
 - `--dir <dir>`: install dir under workdir (default: `skills`)
-- `--site <url>`: base URL for browser login (default: `https://clawdhub.com`)
-- `--registry <url>`: API base URL (default: discovered, else `https://clawdhub.com`)
+- `--site <url>`: base URL for browser login (default: `https://molthub.com`)
+- `--registry <url>`: API base URL (default: discovered, else `https://molthub.com`)
 - `--no-input`: disable prompts
 
 Env equivalents:
 
-- `CLAWDHUB_SITE`
-- `CLAWDHUB_REGISTRY`
-- `CLAWDHUB_WORKDIR`
+- `MOLTHUB_SITE`
+- `MOLTHUB_REGISTRY`
+- `MOLTHUB_WORKDIR`
 
 ## Config file
 
 Stores your API token + cached registry URL.
 
-- macOS: `~/Library/Application Support/clawdhub/config.json`
-- override: `CLAWDHUB_CONFIG_PATH`
+- macOS: `~/Library/Application Support/molthub/config.json`
+- override: `MOLTHUB_CONFIG_PATH`
 
 ## Commands
 
 ### `login` / `auth login`
 
 - Default: opens browser to `<site>/cli/auth` and completes via loopback callback.
-- Headless: `clawdhub login --token clh_...`
+- Headless: `molthub login --token clh_...`
 
 ### `whoami`
 
@@ -72,12 +72,12 @@ Stores your API token + cached registry URL.
 - Downloads zip via `/api/v1/download`.
 - Extracts into `<workdir>/<dir>/<slug>`.
 - Writes:
-  - `<workdir>/.clawdhub/lock.json`
-  - `<skill>/.clawdhub/origin.json`
+  - `<workdir>/.molthub/lock.json`
+  - `<skill>/.molthub/origin.json`
 
 ### `list`
 
-- Reads `<workdir>/.clawdhub/lock.json`.
+- Reads `<workdir>/.molthub/lock.json`.
 
 ### `update [slug]` / `update --all`
 
@@ -96,12 +96,12 @@ Stores your API token + cached registry URL.
 
 - Scans for local skill folders and publishes new/changed ones.
 - Roots can be any folder: a skills directory or a single skill folder with `SKILL.md`.
-- Auto-adds Clawdbot skill roots when `~/.clawdbot/clawdbot.json` is present:
+- Auto-adds Moltbot skill roots when `~/.moltbot/moltbot.json` is present:
   - `agent.workspace/skills` (main agent)
   - `routing.agents.*.workspace/skills` (per-agent)
-  - `~/.clawdbot/skills` (shared)
+  - `~/.moltbot/skills` (shared)
   - `skills.load.extraDirs` (shared packs)
-- Respects `CLAWDBOT_CONFIG_PATH` and `CLAWDBOT_STATE_DIR`.
+- Respects `MOLTBOT_CONFIG_PATH` and `MOLTBOT_STATE_DIR`.
 - Flags:
   - `--root <dir...>` extra scan roots
   - `--all` upload without prompting
@@ -113,5 +113,5 @@ Stores your API token + cached registry URL.
 
 Telemetry:
 
-- Sent during `sync` when logged in, unless `CLAWDHUB_DISABLE_TELEMETRY=1`.
+- Sent during `sync` when logged in, unless `MOLTHUB_DISABLE_TELEMETRY=1`.
 - Details: `docs/telemetry.md`.

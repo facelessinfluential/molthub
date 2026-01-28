@@ -49,7 +49,7 @@
 
   <!-- Right mark -->
   <g opacity="0.22" filter="url(#softBlur)">
-    <image href="clawd-mark.png" x="740" y="70" width="560" height="560" preserveAspectRatio="xMidYMid meet"/>
+    <image href="molt-mark.png" x="740" y="70" width="560" height="560" preserveAspectRatio="xMidYMid meet"/>
   </g>
 
   <!-- Content card -->
@@ -58,7 +58,7 @@
   </g>
 
   <!-- Tiny mark -->
-  <image href="clawd-mark.png" x="108" y="134" width="46" height="46" preserveAspectRatio="xMidYMid meet"/>
+  <image href="molt-mark.png" x="108" y="134" width="46" height="46" preserveAspectRatio="xMidYMid meet"/>
 
   <!-- Pill -->
   <g>
@@ -76,7 +76,7 @@
     fill="#F6EFE4"
     font-size="92"
     font-weight="700"
-    font-family="Bricolage Grotesque, Manrope, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif">ClawdHub</text>
+    font-family="Bricolage Grotesque, Manrope, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif">MoltHub</text>
 
   <!-- Subtitle -->
   <text x="114" y="332"
@@ -94,5 +94,5 @@
     font-size="20"
     font-weight="600"
     opacity="0.90"
-    font-family="IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace">clawdhub.com</text>
+    font-family="IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace">molthub.com</text>
 </svg>

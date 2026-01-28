@@ -3,7 +3,7 @@ import { Link } from '@tanstack/react-router'
 import { Menu, Monitor, Moon, Sun } from 'lucide-react'
 import { useMemo, useRef } from 'react'
 import { gravatarUrl } from '../lib/gravatar'
-import { getClawdHubSiteUrl, getSiteMode, getSiteName } from '../lib/site'
+import { getMoltHubSiteUrl, getSiteMode, getSiteName } from '../lib/site'
 import { applyTheme, useThemeMode } from '../lib/theme'
 import { startThemeTransition } from '../lib/theme-transition'
 import { useAuthStatus } from '../lib/useAuthStatus'
@@ -24,7 +24,7 @@ export default function Header() {
   const siteMode = getSiteMode()
   const siteName = useMemo(() => getSiteName(siteMode), [siteMode])
   const isSoulMode = siteMode === 'souls'
-  const clawdHubUrl = getClawdHubSiteUrl()
+  const moltHubUrl = getMoltHubSiteUrl()
 
   const avatar = me?.image ?? (me?.email ? gravatarUrl(me.email) : undefined)
   const handle = me?.handle ?? me?.displayName ?? 'user'
@@ -53,12 +53,12 @@ export default function Header() {
           className="brand"
         >
           <span className="brand-mark">
-            <img src="/clawd-logo.png" alt="" aria-hidden="true" />
+            <img src="/molt-logo.png" alt="" aria-hidden="true" />
           </span>
           <span className="brand-name">{siteName}</span>
         </Link>
         <nav className="nav-links">
-          {isSoulMode ? <a href={clawdHubUrl}>ClawdHub</a> : null}
+          {isSoulMode ? <a href={moltHubUrl}>MoltHub</a> : null}
           {isSoulMode ? (
             <Link
               to="/souls"
@@ -101,7 +101,7 @@ export default function Header() {
               <DropdownMenuContent align="end">
                 {isSoulMode ? (
                   <DropdownMenuItem asChild>
-                    <a href={clawdHubUrl}>ClawdHub</a>
+                    <a href={moltHubUrl}>MoltHub</a>
                   </DropdownMenuItem>
                 ) : null}
                 <DropdownMenuItem asChild>

@@ -1,4 +1,4 @@
-import { getClawdHubSiteUrl, getOnlyCrabsSiteUrl } from './site'
+import { getMoltHubSiteUrl, getOnlyCrabsSiteUrl } from './site'
 
 type SkillMetaSource = {
   slug: string
@@ -32,13 +32,13 @@ type SoulMeta = {
   owner: string | null
 }
 
-const DEFAULT_DESCRIPTION = 'ClawdHub — a fast skill registry for agents, with vector search.'
+const DEFAULT_DESCRIPTION = 'MoltHub — a fast skill registry for agents, with vector search.'
 const DEFAULT_SOUL_DESCRIPTION = 'SoulHub — the home for SOUL.md bundles and personal system lore.'
 const OG_SKILL_IMAGE_LAYOUT_VERSION = '5'
 const OG_SOUL_IMAGE_LAYOUT_VERSION = '1'
 
 export function getSiteUrl() {
-  return getClawdHubSiteUrl()
+  return getMoltHubSiteUrl()
 }
 
 export function getSoulSiteUrl() {
@@ -100,9 +100,9 @@ export function buildSkillMeta(source: SkillMetaSource): SkillMeta {
   const displayName = clean(source.displayName) || clean(source.slug)
   const summary = clean(source.summary)
   const version = clean(source.version)
-  const title = `${displayName} — ClawdHub`
+  const title = `${displayName} — MoltHub`
   const description =
-    summary || (owner ? `Agent skill by @${owner} on ClawdHub.` : DEFAULT_DESCRIPTION)
+    summary || (owner ? `Agent skill by @${owner} on MoltHub.` : DEFAULT_DESCRIPTION)
   const url = owner ? `${siteUrl}/${owner}/${source.slug}` : `${siteUrl}/skills/${source.slug}`
   const imageParams = new URLSearchParams()
   imageParams.set('v', OG_SKILL_IMAGE_LAYOUT_VERSION)

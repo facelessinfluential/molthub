@@ -1,17 +1,17 @@
-# ClawdHub
+# MoltHub
 
 <p align="center">
-  <a href="https://github.com/clawdbot/clawdhub/actions/workflows/ci.yml?branch=main"><img src="https://img.shields.io/github/actions/workflow/status/clawdbot/clawdhub/ci.yml?branch=main&style=for-the-badge" alt="CI status"></a>
-  <a href="https://discord.gg/clawd"><img src="https://img.shields.io/discord/1456350064065904867?label=Discord&logo=discord&logoColor=white&color=5865F2&style=for-the-badge" alt="Discord"></a>
+  <a href="https://github.com/moltbot/molthub/actions/workflows/ci.yml?branch=main"><img src="https://img.shields.io/github/actions/workflow/status/moltbot/molthub/ci.yml?branch=main&style=for-the-badge" alt="CI status"></a>
+  <a href="https://discord.gg/molt"><img src="https://img.shields.io/discord/1456350064065904867?label=Discord&logo=discord&logoColor=white&color=5865F2&style=for-the-badge" alt="Discord"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT License"></a>
 </p>
 
-ClawdHub is the **public skill registry for Clawdbot**: publish, version, and search text-based agent skills (a `SKILL.md` plus supporting files).
+MoltHub is the **public skill registry for Moltbot**: publish, version, and search text-based agent skills (a `SKILL.md` plus supporting files).
 It’s designed for fast browsing + a CLI-friendly API, with moderation hooks and vector search.
 
 onlycrabs.ai is the **SOUL.md registry**: publish and share system lore the same way you publish skills.
 
-Live: `https://clawdhub.com`
+Live: `https://molthub.com`
 onlycrabs.ai: `https://onlycrabs.ai`
 
 ## What you can do
@@ -27,7 +27,7 @@ onlycrabs.ai: `https://onlycrabs.ai`
 
 - Entry point is host-based: `onlycrabs.ai`.
 - On the onlycrabs.ai host, the home page and nav default to souls.
-- On ClawdHub, souls live under `/souls`.
+- On MoltHub, souls live under `/souls`.
 - Soul bundles only accept `SOUL.md` for now (no extra files).
 
 ## How it works (high level)
@@ -35,15 +35,15 @@ onlycrabs.ai: `https://onlycrabs.ai`
 - Web app: TanStack Start (React, Vite/Nitro).
 - Backend: Convex (DB + file storage + HTTP actions) + Convex Auth (GitHub OAuth).
 - Search: OpenAI embeddings (`text-embedding-3-small`) + Convex vector search.
-- API schema + routes: `packages/schema` (`clawdhub-schema`).
+- API schema + routes: `packages/schema` (`molthub-schema`).
 
 ## Telemetry
 
-ClawdHub tracks minimal **install telemetry** (to compute install counts) when you run `clawdhub sync` while logged in.
+MoltHub tracks minimal **install telemetry** (to compute install counts) when you run `molthub sync` while logged in.
 Disable via:
 
 ```bash
-export CLAWDHUB_DISABLE_TELEMETRY=1
+export MOLTHUB_DISABLE_TELEMETRY=1
 ```
 
 Details: `docs/telemetry.md`.
@@ -95,7 +95,7 @@ This writes `JWT_PRIVATE_KEY` + `JWKS` to the deployment and prints values for y
 
 ## Nix plugins (nixmode skills)
 
-ClawdHub can store a nix-clawdbot plugin pointer in SKILL frontmatter so the registry knows which
+MoltHub can store a nix-moltbot plugin pointer in SKILL frontmatter so the registry knows which
 Nix package bundle to install. A nix plugin is different from a regular skill pack: it bundles the
 skill pack, the CLI binary, and its config flags/requirements together.
 
@@ -105,15 +105,15 @@ Add this to `SKILL.md`:
 ---
 name: peekaboo
 description: Capture and automate macOS UI with the Peekaboo CLI.
-metadata: {"clawdbot":{"nix":{"plugin":"github:clawdbot/nix-steipete-tools?dir=tools/peekaboo","systems":["aarch64-darwin"]}}}
+metadata: {"moltbot":{"nix":{"plugin":"github:moltbot/nix-steipete-tools?dir=tools/peekaboo","systems":["aarch64-darwin"]}}}
 ---
 ```
 
-Install via nix-clawdbot:
+Install via nix-moltbot:
 
 ```nix
-programs.clawdbot.plugins = [
-  { source = "github:clawdbot/nix-steipete-tools?dir=tools/peekaboo"; }
+programs.moltbot.plugins = [
+  { source = "github:moltbot/nix-steipete-tools?dir=tools/peekaboo"; }
 ];
 ```
 
@@ -123,7 +123,7 @@ You can also declare config requirements + an example snippet:
 ---
 name: padel
 description: Check padel court availability and manage bookings via Playtomic.
-metadata: {"clawdbot":{"config":{"requiredEnv":["PADEL_AUTH_FILE"],"stateDirs":[".config/padel"],"example":"config = { env = { PADEL_AUTH_FILE = \\\"/run/agenix/padel-auth\\\"; }; };"}}}
+metadata: {"moltbot":{"config":{"requiredEnv":["PADEL_AUTH_FILE"],"stateDirs":[".config/padel"],"example":"config = { env = { PADEL_AUTH_FILE = \\\"/run/agenix/padel-auth\\\"; }; };"}}}
 ---
 ```
 
@@ -133,11 +133,11 @@ To show CLI help (recommended for nix plugins), include the `cli --help` output:
 ---
 name: padel
 description: Check padel court availability and manage bookings via Playtomic.
-metadata: {"clawdbot":{"cliHelp":"padel --help\\nUsage: padel [command]\\n"}}
+metadata: {"moltbot":{"cliHelp":"padel --help\\nUsage: padel [command]\\n"}}
 ---
 ```
 
-`metadata.clawdbot` is preferred, but `metadata.clawdis` is accepted as an alias for compatibility.
+`metadata.moltbot` is preferred, but `metadata.moltbot` is accepted as an alias for compatibility.
 
 ## Scripts
 

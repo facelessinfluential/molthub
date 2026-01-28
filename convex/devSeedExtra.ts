@@ -11,7 +11,7 @@ import { internal } from './_generated/api'
 import type { Id } from './_generated/dataModel'
 import type { ActionCtx } from './_generated/server'
 import { internalAction, internalMutation } from './_generated/server'
-import { parseClawdisMetadata, parseFrontmatter } from './lib/skills'
+import { parseMoltbotMetadata, parseFrontmatter } from './lib/skills'
 
 type SeedSkillSpec = {
   slug: string
@@ -66,7 +66,7 @@ Use this skill to ${summary.toLowerCase()}.
     summary,
     version: '0.1.0',
     metadata: {
-      clawdbot: {
+      moltbot: {
         nix: {
           plugin: `github:example/${slug}`,
           systems: ['aarch64-darwin', 'x86_64-linux'],
@@ -505,7 +505,7 @@ export const seedExtraSkillsInternal = internalAction({
     for (const spec of EXTRA_SEED_SKILLS) {
       const skillMd = injectMetadata(spec.rawSkillMd, spec.metadata)
       const frontmatter = parseFrontmatter(skillMd)
-      const clawdis = parseClawdisMetadata(frontmatter)
+      const moltbot = parseMoltbotMetadata(frontmatter)
       const storageId = await ctx.storage.store(new Blob([skillMd], { type: 'text/markdown' }))
 
       const result = (await ctx.runMutation(internal.devSeed.seedSkillMutation, {
@@ -513,7 +513,7 @@ export const seedExtraSkillsInternal = internalAction({
         storageId,
         metadata: spec.metadata,
         frontmatter,
-        clawdis,
+        moltbot,
         skillMd,
         slug: spec.slug,
         displayName: spec.displayName,

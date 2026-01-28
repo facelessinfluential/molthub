@@ -45,9 +45,9 @@ describe('theme', () => {
 
   it('reads stored theme with fallback', () => {
     expect(getStoredTheme()).toBe('system')
-    window.localStorage.setItem('clawdhub-theme', 'dark')
+    window.localStorage.setItem('molthub-theme', 'dark')
     expect(getStoredTheme()).toBe('dark')
-    window.localStorage.setItem('clawdhub-theme', 'nope')
+    window.localStorage.setItem('molthub-theme', 'nope')
     expect(getStoredTheme()).toBe('system')
   })
 
@@ -83,6 +83,6 @@ describe('theme', () => {
     await waitFor(() => {
       expect(document.documentElement.dataset.theme).toBe('dark')
     })
-    expect(window.localStorage.getItem('clawdhub-theme')).toBe('dark')
+    expect(window.localStorage.getItem('molthub-theme')).toBe('dark')
   })
 })

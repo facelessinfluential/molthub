@@ -14,7 +14,7 @@ describe('og helpers', () => {
       summary: 'Forecasts for your area.',
       version: '1.2.3',
     })
-    expect(meta.title).toBe('Weather — ClawdHub')
+    expect(meta.title).toBe('Weather — MoltHub')
     expect(meta.description).toBe('Forecasts for your area.')
     expect(meta.url).toContain('/steipete/weather')
     expect(meta.owner).toBe('steipete')
@@ -48,8 +48,8 @@ describe('og helpers', () => {
 
   it('uses defaults when owner and summary are missing', () => {
     const meta = buildSkillMeta({ slug: 'parser' })
-    expect(meta.title).toBe('parser — ClawdHub')
-    expect(meta.description).toMatch(/ClawdHub — a fast skill registry/i)
+    expect(meta.title).toBe('parser — MoltHub')
+    expect(meta.description).toMatch(/MoltHub — a fast skill registry/i)
     expect(meta.url).toContain('/skills/parser')
     expect(meta.owner).toBeNull()
     expect(meta.image).toContain('slug=parser')

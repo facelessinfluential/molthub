@@ -9,11 +9,11 @@ export function Footer() {
         <div className="site-footer-row">
           <div className="site-footer-copy">
             {siteName} · A{' '}
-            <a href="https://clawd.bot" target="_blank" rel="noreferrer">
-              Clawdbot
+            <a href="https://molt.bot" target="_blank" rel="noreferrer">
+              Moltbot
             </a>{' '}
             project ·{' '}
-            <a href="https://github.com/clawdbot/clawdhub" target="_blank" rel="noreferrer">
+            <a href="https://github.com/moltbot/molthub" target="_blank" rel="noreferrer">
               Open source (MIT)
             </a>{' '}
             ·{' '}

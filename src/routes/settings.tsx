@@ -116,7 +116,7 @@ function Settings() {
           API tokens
         </h2>
         <p className="section-subtitle">
-          Use these tokens for the `clawdhub` CLI. Tokens are shown once on creation.
+          Use these tokens for the `molthub` CLI. Tokens are shown once on creation.
         </p>
 
         <div className="settings-field">

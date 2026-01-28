@@ -323,7 +323,7 @@ export function SkillsIndex() {
         <div className="grid">
           {sorted.map((entry) => {
             const skill = entry.skill
-            const isPlugin = Boolean(entry.latestVersion?.parsed?.clawdis?.nix?.plugin)
+            const isPlugin = Boolean(entry.latestVersion?.parsed?.moltbot?.nix?.plugin)
             const skillHref = buildSkillHref(skill, entry.ownerHandle)
             return (
               <SkillCard
@@ -347,7 +347,7 @@ export function SkillsIndex() {
         <div className="skills-list">
           {sorted.map((entry) => {
             const skill = entry.skill
-            const isPlugin = Boolean(entry.latestVersion?.parsed?.clawdis?.nix?.plugin)
+            const isPlugin = Boolean(entry.latestVersion?.parsed?.moltbot?.nix?.plugin)
             const skillHref = buildSkillHref(skill, entry.ownerHandle)
             return (
               <Link key={skill._id} className="skills-row" to={skillHref}>

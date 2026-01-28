@@ -113,7 +113,7 @@ const skillVersions = defineTable({
   parsed: v.object({
     frontmatter: v.record(v.string(), v.any()),
     metadata: v.optional(v.any()),
-    clawdis: v.optional(v.any()),
+    moltbot: v.optional(v.any()),
   }),
   createdBy: v.id('users'),
   createdAt: v.number(),

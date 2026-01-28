@@ -7,7 +7,7 @@ read_when:
 
 # HTTP API
 
-Base URL: `https://clawdhub.com` (default).
+Base URL: `https://molthub.com` (default).
 
 All v1 paths are under `/api/v1/...` and implemented by Convex HTTP routes (`convex/http.ts`).
 Legacy `/api/...` and `/api/cli/...` remain for compatibility (see `DEPRECATIONS.md`).
@@ -172,16 +172,16 @@ Still supported for older CLI versions:
 
 See `DEPRECATIONS.md` for removal plan.
 
-## Registry discovery (`/.well-known/clawdhub.json`)
+## Registry discovery (`/.well-known/molthub.json`)
 
 The CLI can discover registry/auth settings from the site:
 
-- `/.well-known/clawdhub.json` (JSON)
+- `/.well-known/molthub.json` (JSON)
 
 Schema:
 
 ```json
-{ "apiBase": "https://clawdhub.com", "authBase": "https://clawdhub.com", "minCliVersion": "0.0.5" }
+{ "apiBase": "https://molthub.com", "authBase": "https://molthub.com", "minCliVersion": "0.0.5" }
 ```
 
-If you self-host, serve this file (or set `CLAWDHUB_REGISTRY` explicitly).
+If you self-host, serve this file (or set `MOLTHUB_REGISTRY` explicitly).

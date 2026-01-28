@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 export type ThemeMode = 'system' | 'light' | 'dark'
 
-const THEME_KEY = 'clawdhub-theme'
+const THEME_KEY = 'molthub-theme'
 
 export function getStoredTheme(): ThemeMode {
   if (typeof window === 'undefined') return 'system'

@@ -1,0 +1,6 @@
+{
+  "apiBase": "https://molthub.com",
+  "authBase": "https://molthub.com",
+  "minCliVersion": "0.1.0",
+  "registry": "https://molthub.com"
+}

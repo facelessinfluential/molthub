@@ -16,7 +16,7 @@ export type WebhookConfig = {
   siteUrl: string
 }
 
-const DEFAULT_SITE_URL = 'https://clawdhub.com'
+const DEFAULT_SITE_URL = 'https://molthub.com'
 
 export function getWebhookConfig(env: NodeJS.ProcessEnv = process.env): WebhookConfig {
   const url = env.DISCORD_WEBHOOK_URL?.trim() || null
@@ -72,7 +72,7 @@ export function buildDiscordPayload(
           },
         ],
         footer: {
-          text: 'ClawdHub',
+          text: 'MoltHub',
         },
         timestamp: new Date().toISOString(),
       },
@@ -89,9 +89,9 @@ export function buildSkillUrl(skill: WebhookSkillPayload, siteUrl: string) {
 function buildDescription(event: WebhookEvent, skill: WebhookSkillPayload) {
   const summary = (skill.summary ?? '').trim()
   if (summary) return truncate(summary, 200)
-  if (event === 'skill.highlighted') return 'Newly highlighted skill on ClawdHub.'
-  if (skill.version) return `New version v${skill.version} published on ClawdHub.`
-  return 'New skill published on ClawdHub.'
+  if (event === 'skill.highlighted') return 'Newly highlighted skill on MoltHub.'
+  if (skill.version) return `New version v${skill.version} published on MoltHub.`
+  return 'New skill published on MoltHub.'
 }
 
 function parseBoolean(value?: string) {

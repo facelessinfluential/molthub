@@ -39,7 +39,7 @@ function SkillsHome() {
         <div className="hero-inner">
           <div className="hero-copy fade-up" data-delay="1">
             <span className="hero-badge">Lobster-light. Agent-right.</span>
-            <h1 className="hero-title">ClawdHub, the skill dock for sharp agents.</h1>
+            <h1 className="hero-title">MoltHub, the skill dock for sharp agents.</h1>
             <p className="hero-subtitle">
               Upload AgentSkills bundles, version them like npm, and make them searchable with
               vectors. No gatekeeping, just signal.

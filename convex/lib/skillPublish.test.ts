@@ -4,7 +4,7 @@ import { __test } from './skillPublish'
 describe('skillPublish', () => {
   it('merges github source into metadata', () => {
     const merged = __test.mergeSourceIntoMetadata(
-      { clawdis: { emoji: 'x' } },
+      { moltbot: { emoji: 'x' } },
       {
         kind: 'github',
         url: 'https://github.com/a/b',
@@ -15,7 +15,7 @@ describe('skillPublish', () => {
         importedAt: 123,
       },
     )
-    expect((merged as Record<string, unknown>).clawdis).toEqual({ emoji: 'x' })
+    expect((merged as Record<string, unknown>).moltbot).toEqual({ emoji: 'x' })
     const source = (merged as Record<string, unknown>).source
     expect(source).toEqual(
       expect.objectContaining({
